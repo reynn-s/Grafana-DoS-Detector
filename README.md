@@ -10,6 +10,15 @@ Grafana installation using docker:
 Loki Installation using docker:
 ```docker run -d --name loki --network host grafana/loki:latest```
 
+## IP Configuration
+since we're using a local ip to test this dashboard we have to add local ip manually by using:
+```
+  sudo ip addr add 127.0.0.2/8 dev lo
+  sudo ip addr add 127.0.0.3/8 dev lo
+  sudo ip addr add 127.0.0.4/8 dev lo
+  sudo ip addr add 127.0.0.5/8 dev lo
+```
+
 ## Python Script
 In this project we're using 2 python script:
 
