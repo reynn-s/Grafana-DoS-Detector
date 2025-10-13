@@ -55,3 +55,10 @@ in [Test Loopback](./pythonScript/test_loopback.py) line 11-17 we can change the
 
 ## Screenshot of Our Grafana Dashboard
 ![Screenshot of DoS Detector Dashboard](https://github.com/reynn-s/Grafana-DoS-Detector/blob/main/Screenshot/DoS_Detector_Dashboard.jpeg)
+
+## How to Use Simulate DoS
+
+### Prerequisite
+before running the [Test Loopback](./pythonScript/test_loopback.py) the Grafana, Loki, and [Log Forwarder](./pythonScript/python_forwader_dos.py) must be running so they can work together to read and visualize the log. Also, adding the additional local ip is required since we need that for our test_loopback.py
+
+after the prerequisite is done then run ``` ncat -l 9999 --keep-open ```. Next, run the test_loopback.py and the dashboard should be showing more alert, network spike, and such. And to stress the cpu we can use ``` stress --cpu $(nproc) --timeout 30s ```
