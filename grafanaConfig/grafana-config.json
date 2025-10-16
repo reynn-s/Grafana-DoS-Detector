@@ -1,4 +1,53 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_LOKI",
+      "label": "Loki Data Source",
+      "description": "Select your Loki data source for log queries",
+      "type": "datasource",
+      "pluginId": "loki",
+      "pluginName": "Loki"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "12.2.0"
+    },
+    {
+      "type": "datasource",
+      "id": "loki",
+      "name": "Loki",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "gauge",
+      "name": "Gauge",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "logs",
+      "name": "Logs",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -18,13 +67,13 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 0,
+  "id": null,
   "links": [],
   "panels": [
     {
       "datasource": {
         "type": "loki",
-        "uid": "cf0w70qxyo3y8e"
+        "uid": "${DS_LOKI}"
       },
       "fieldConfig": {
         "defaults": {
@@ -80,7 +129,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "cf0w70qxyo3y8e"
+            "uid": "${DS_LOKI}"
           },
           "direction": "backward",
           "editorMode": "code",
@@ -96,7 +145,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "cf0w70qxyo3y8e"
+        "uid": "${DS_LOKI}"
       },
       "fieldConfig": {
         "defaults": {
@@ -147,6 +196,10 @@
       "pluginVersion": "12.2.0",
       "targets": [
         {
+          "datasource": {
+            "type": "loki",
+            "uid": "${DS_LOKI}"
+          },
           "direction": "backward",
           "editorMode": "code",
           "expr": "count_over_time({job=\"python-forwarder\", env=\"lab\"} |= \"ALERT\" [3h])",
@@ -161,7 +214,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "cf0w70qxyo3y8e"
+        "uid": "${DS_LOKI}"
       },
       "fieldConfig": {
         "defaults": {
@@ -215,6 +268,10 @@
       "pluginVersion": "12.2.0",
       "targets": [
         {
+          "datasource": {
+            "type": "loki",
+            "uid": "${DS_LOKI}"
+          },
           "direction": "backward",
           "editorMode": "code",
           "expr": "avg_over_time({job=\"python-forwarder\", env=\"lab\"} \n  | regexp \"net_bps=(?P<net_bps>[0-9]+)\" \n  | unwrap net_bps [1m])",
@@ -229,7 +286,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "cf0w70qxyo3y8e"
+        "uid": "${DS_LOKI}"
       },
       "fieldConfig": {
         "defaults": {
@@ -339,6 +396,10 @@
       "pluginVersion": "12.2.0",
       "targets": [
         {
+          "datasource": {
+            "type": "loki",
+            "uid": "${DS_LOKI}"
+          },
           "direction": "backward",
           "editorMode": "code",
           "expr": "topk(20,\n  sum by (src_ip) (\n    sum_over_time(\n      {job=\"python-forwarder\", env=\"lab\"} \n      | regexp \"src=(?P<src_ip>[0-9\\\\.]+).*connections=(?P<connections>\\\\d+)\"\n      | src_ip != \"127.0.0.1\"\n      | unwrap connections [5m]\n    )\n  )\n)",
@@ -352,7 +413,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "cf0w70qxyo3y8e"
+        "uid": "${DS_LOKI}"
       },
       "fieldConfig": {
         "defaults": {
@@ -430,6 +491,10 @@
       "pluginVersion": "12.2.0",
       "targets": [
         {
+          "datasource": {
+            "type": "loki",
+            "uid": "${DS_LOKI}"
+          },
           "direction": "backward",
           "editorMode": "code",
           "expr": "avg_over_time({job=\"python-forwarder\", env=\"lab\"} \n  | regexp \"net_bps=(?P<net_bps>[0-9]+)\" \n  | unwrap net_bps [1m])",
@@ -443,7 +508,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "cf0w70qxyo3y8e"
+        "uid": "${DS_LOKI}"
       },
       "fieldConfig": {
         "defaults": {},
@@ -470,6 +535,10 @@
       "pluginVersion": "12.2.0",
       "targets": [
         {
+          "datasource": {
+            "type": "loki",
+            "uid": "${DS_LOKI}"
+          },
           "direction": "backward",
           "editorMode": "code",
           "expr": "{job=\"python-forwarder\", env=\"lab\"} |~ \"ALERT\"",
@@ -483,7 +552,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "cf0w70qxyo3y8e"
+        "uid": "${DS_LOKI}"
       },
       "fieldConfig": {
         "defaults": {},
@@ -510,6 +579,10 @@
       "pluginVersion": "12.2.0",
       "targets": [
         {
+          "datasource": {
+            "type": "loki",
+            "uid": "${DS_LOKI}"
+          },
           "direction": "backward",
           "editorMode": "code",
           "expr": "{job=\"python-forwarder\", env=\"lab\"}",
@@ -536,5 +609,6 @@
   "timezone": "browser",
   "title": "DoS Detector Dashboard",
   "uid": "adklm4h",
-  "version": 11
+  "version": 11,
+  "gnetId": null
 }
