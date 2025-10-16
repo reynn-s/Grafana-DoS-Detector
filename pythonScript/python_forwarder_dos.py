@@ -242,22 +242,7 @@ def main():
                     push_to_loki(alert_logs)
                     last_alert_time = now_ts
                     consecutive_alert_windows = 0
-
-            # --- Event Manager (correlation) ---
-            if cpu_trigger and net_trigger:
-                now_ts = time.time()
-                if now_ts - last_event_time >= 30:  # prevent spam
-                    # List top traffic sources
-                    top_ips = get_top_traffic_ips(top_n=5)
-                    ip_list = ', '.join(top_ips) if top_ips else host_ip
-                    event_log = event_message(
-                       "DOS_DETECTED",
-                        f"High CPU and Network usage - Top sources: {ip_list}"
-                    )
-                    push_to_loki([(now_ns(), event_log, "event")])
-                    print(f"[EVENT] {event_log}")
-                    last_event_time = now_ts
-
+                    
         except KeyboardInterrupt:
             print("\nStopping forwarder.")
             print(f"\nConnection summary:")
